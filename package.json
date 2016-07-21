@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/rcorp/post-messenger/issues"
   },
-  "homepage": "https://github.com/rcorp/post-messenger#readme"
+  "homepage": "https://github.com/rcorp/post-messenger#readme",
+  "dependencies": {
+    "standard-project-structure": "git+https://github.com/rcorp/standard-project-structure.git#master"
+  }
 }
