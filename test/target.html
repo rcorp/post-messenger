@@ -7,7 +7,7 @@
 <script src="../src/target.js"></script>
 <script>
 pm.connect('http://localhost:8080');
-pm.on('send message to the selected target',function(eventdata){
+pm.on('send message to the selected target', function(eventdata){
   console.log('target side message', eventdata);
 });
 
@@ -20,7 +20,6 @@ pm.on('myevent2', function (data){
 });
 
 pm.emit('send message to the selected client', 'hello client');
-
 </script>
 
 <body>

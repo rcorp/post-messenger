@@ -3,7 +3,7 @@ var pm = {};
 pm.connect = function(serverURl){
   socket = io(serverURl);
   socket.on('connect', function() {
-    socket.emit('connected',{platform:'platform'});
+    socket.emit('connected', {platform:'platform'});
   });
 };
 
