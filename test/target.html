@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<script src="../node_modules/socket.io-client/socket.io.js"></script>
+<script src="../src/target.js"></script>
+<script>
+pm.connect('http://localhost:8080');
+pm.on('send message to the selected target',function(eventdata){
+  console.log('target side message', eventdata);
+});
+
+pm.on('myevent1', function (data){
+  console.log('Data should be 1', data.d)
+})
+
+pm.on('myevent2', function (data){
+  console.log('Data should be 2', data.d)
+});
+
+pm.emit('send message to the selected client', 'hello client');
+
+</script>
+
+<body>
+  <p> look in the console </p>
+</body>
+</html>
