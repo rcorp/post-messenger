@@ -1,22 +1,20 @@
-var socket;
-var pm = {};
+window.pm = {};
 pm.connect = function(serverURl){
-  socket = io(serverURl);
-  socket.on('connect', function() {
-    socket.emit('connected', {platform:'platform'});
+  pm._socket = io(serverURl);
+  pm._socket.on('connect', function() {
+    // emit the platform details to server
+    pm._socket.emit('connected', {platform:'platform'});
   });
 };
 
 pm.on = function(eventName, cb){
-  console.log ('Inside on');
-  socket.on(eventName, function(eventData){
-    console.log ('Inside socket.on');
+  pm._socket.on(eventName, function(eventData){
     cb(eventData);
   });
 };
 
 pm.emit = function(eventName, eventData){
-  socket.emit('send message to a client',{
+  pm._socket.emit('sendMessageToClient',{
     eventName: eventName,
     eventData: eventData
   });

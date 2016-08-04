@@ -15,15 +15,15 @@ pm.on('targetConnected', function(targetId){
 });
 setTimeout(function(){
   pm.connectTarget(targetIds[1]);
-  pm.emit('send message to the selected target', targetIds[1], 'hello target1');
+  pm.emit('sendMessageToTheSelectedTarget', targetIds[1], 'hello target1');
   pm.emit('myevent2', targetIds[1], {d: 2})
   pm.emit('myevent1', targetIds[1], {d: 1})
-  pm.on('send message to the selected client', function(eventdata){
+  pm.on('sendMessageToTheSelectedClient', function(eventdata){
     console.log('client message', eventdata);
   });
 },20000);
 setTimeout(function(){
-  pm.on('send message to the selected client', function(eventdata){
+  pm.on('sendMessageToTheSelectedClient', function(eventdata){
     console.log('client message', eventdata);
   });
 },8000);
