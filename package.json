@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/rcorp/post-messenger#readme",
   "dependencies": {
-    "standard-project-structure": "git+https://github.com/rcorp/standard-project-structure.git#master"
+    "socket.io": "1.4.8",
+    "socket.io-client": "1.4.8"
   }
 }
