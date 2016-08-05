@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<script src="../dist/pm-target.js"></script>
+<script>
+pm.connect('http://localhost:8080');
+pm.on('sendMessageToTheSelectedTarget', function(eventdata){
+  console.log('target side message', eventdata);
+});
+
+pm.on('myevent1', function (data){
+  console.log('Data should be 1', data.d)
+})
+
+pm.on('myevent2', function (data){
+  console.log('Data should be 2', data.d)
+});
+
+pm.emit('sendMessageToTheSelectedClient', 'hello client');
+</script>
+
+<body>
+  <p> look in the console </p>
+</body>
+</html>
