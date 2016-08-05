@@ -1,4 +1,5 @@
-window.pm = {};
+var io = require('socket.io-client');
+var pm = {};
 pm.connect = function(serverURl){
   pm._socket = io(serverURl);
   pm._socket.on('connect', function() {
@@ -19,3 +20,4 @@ pm.emit = function(eventName, eventData){
     eventData: eventData
   });
 };
+module.exports = pm;

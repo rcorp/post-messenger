@@ -1,37 +1,39 @@
-var io = require('socket.io')(8080);
-var pm = {};
-global.connectCentre = {};
-io.on('connection', function(socket){
+var connectCentre = {};
+module.exports = function (socket, next){
   socket.on('connected', function(data){
-    // check the platform of target
+    socket._pm = {};
+
+    // check the if the connect socket is a target
     if(data.platform){
-      io.sockets.to('clients').emit('targetConnected', socket.id);
-      socket._pm = {};
       socket._pm.type = 'target';
-    } else{
-      socket.join('clients');
-      socket._pm = {};
+      socket.to('clients').emit('targetConnected', socket.id);
+    }
+
+    // Or a client!
+    else {
       socket._pm.type = 'client'
+      socket.join('clients');
     }
   });
 
-socket.on('selectedTargetId', function(selectedTargetId){
-  connectCentre = {[selectedTargetId]:socket.id};
-});
+  socket.on('selectedTargetId', function(selectedTargetId){
+    connectCentre[selectedTargetId] = socket.id;
+  });
 
-socket.on('sendMessageToTarget', function(data){
-  io.sockets.to(data.targetId).emit(data.eventName, data.eventData);
-});
+  socket.on('sendMessageToTarget', function(data){
+    socket.to(data.targetId).emit(data.eventName, data.eventData);
+  });
 
-socket.on('sendMessageToClient', function(data){
-  io.sockets.to(connectCentre[socket.id]).emit(data.eventName, data.eventData);
-});
+  socket.on('sendMessageToClient', function(data){
+    socket.to(connectCentre[socket.id]).emit(data.eventName, data.eventData);
+  });
 
-socket.on('disconnect', function () {
-  if(socket._pm.type == 'target') {
-    var clientid = connectCentre[socket.id];
-    io.sockets.to(clientid).emit('targetDisconnected',socket.id);
-  }
-});
-
-});
+  socket.on('disconnect', function () {
+    if(socket._pm.type == 'target') {
+      var clientid = connectCentre[socket.id];
+      socket.to(clientid).emit('targetDisconnected',socket.id);
+    }
+  });
+  
+  next();
+};
