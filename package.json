@@ -2,10 +2,14 @@
   "name": "post-messenger",
   "version": "1.0.0",
   "description": "",
-  "main": "Gruntfile.js",
+  "main": "./src/server.js",
   "directories": {
     "doc": "docs",
     "test": "test"
+  },
+  "browser": {
+    "/pm-client": "./src/client.js",
+    "/pm-target": "./src/target.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
