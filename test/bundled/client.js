@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<script src="../../dist/pm-client.js"></script>
-
-<script>
 var targetIds =[];
+var pm = require('pm/pm-client');
 pm.connect('http://localhost:8081');
 pm.on('targetConnected', function(targetId){
   console.log('target name---', targetId);
@@ -26,9 +20,3 @@ setTimeout(function(){
     console.log('client message', eventdata);
   });
 },8000);
-</script>
-
-<body>
-  <p> look in the console </p>
-</body>
-</html>
