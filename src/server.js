@@ -30,10 +30,10 @@ module.exports = function (socket, next){
 
   socket.on('disconnect', function () {
     if(socket._pm.type == 'target') {
-      var clientid = connectCentre[socket.id];
-      socket.to(clientid).emit('targetDisconnected',socket.id);
+    //  var clientid = connectCentre[socket.id];
+      socket.to(clients).emit('targetDisconnected',socket.id);
     }
   });
-  
+
   next();
 };
